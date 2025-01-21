@@ -11,6 +11,20 @@ from pathlib import Path
 import pandas as pd
 from nostril import nonsense
 
+
+def save_to_csv(cipher_text, key):
+    print(cipher_text)
+    file = 'railfencemini.csv'
+    if nonsense(cipher_text):
+        file_exists = Path(file).is_file()
+        with open(file, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(["CipherText", "Key"])
+            writer.writerow([cipher_text, key])
+    else:
+        print(f"This string is English and will be ignored.")
+
 def generate_array(key=''):
     """Create Polybius square with transposition."""
     alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'  # I and J are combined
@@ -111,7 +125,7 @@ def main():
       if nonsense(text):
         print("text is nonsense")
       else:
-        key = create_key()  
+        key = create_key()
         array = generate_array(key)
         display_array(array)
         if text is not None:
@@ -122,11 +136,17 @@ def main():
                 save_to_csv(cipher_text, key)
 
 
-      key = input("Enter a key for the Polybius square (optional): ").strip()
-      array = generate_array(key)
-      display_array(array)
-      result = format_cipher(encode(text, array))
-                
+
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+def main():
+
