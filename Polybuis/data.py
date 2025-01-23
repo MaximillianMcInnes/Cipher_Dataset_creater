@@ -69,7 +69,8 @@ def encode(words, array):
     return cipher
 
 
- def get_random_article_title():
+ 
+def get_random_article_title():
     try:
         response = requests.get("https://en.wikipedia.org/w/api.php?action=query&list=random&rnlimit=1&format=json")
         response.raise_for_status()
@@ -133,7 +134,7 @@ def main():
 
         for part in parts:
             for ciphertext in format_cipher(encode(text, array))
-                save_to_csv(cipher_text, key)
+                save_to_csv(ciphertext, key)
 
 
 
@@ -147,6 +148,4 @@ if __name__ == "__main__":
 
 
 
-
-def main():
 
