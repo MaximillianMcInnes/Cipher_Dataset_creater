@@ -155,24 +155,38 @@ def encryptByPlayfairCipher(Matrix, plainList):
         CipherText.append(cipher)
     return CipherText
 
+def generate_key():
+  for letter in range(random.randint(1,26)):
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    key = ''.join(random.sample(alphabet, letter))
+    return key
 
-text_Plain = 'instruments'
-text_Plain = removeSpaces(toLowerCase(text_Plain))
-PlainTextList = Diagraph(FillerLetter(text_Plain))
-if len(PlainTextList[-1]) != 2:
-    PlainTextList[-1] = PlainTextList[-1]+'z'
 
-key = "Monarchy"
-print("Key text:", key)
-key = toLowerCase(key)
-Matrix = generateKeyTable(key, list1)
+def encrypt_text(text_Plain):
+  
+  text_Plain = removeSpaces(toLowerCase(text_Plain))
+  PlainTextList = Diagraph(FillerLetter(text_Plain))
+  if len(PlainTextList[-1]) != 2:
+      PlainTextList[-1] = PlainTextList[-1]+'z'
 
-print("Plain Text:", text_Plain)
-CipherList = encryptByPlayfairCipher(Matrix, PlainTextList)
+  key = generate_key()
+  print("Key text:", key)
+  key = toLowerCase(key)
+  Matrix = generateKeyTable(key, list1)
 
-CipherText = ""
-for i in CipherList:
-    CipherText += i
-print("CipherText:", CipherText)
+  CipherList = encryptByPlayfairCipher(Matrix, PlainTextList)
 
-# This code is Contributed by Boda_Venkata_Nikith
+  CipherText = ""
+  for i in CipherList:
+      CipherText += i
+  print("CipherText:", CipherText)
+  return CipherText
+
+
+def main():
+  text = "this is a text of some sort idk tho"
+  encrypt_text(text)
+  
+
+if __name__ == '__main__':
+  main()
